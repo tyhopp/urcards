@@ -12,8 +12,6 @@ import DeckCover from './components/DeckCover'
 import DeckCreator from './components/DeckCreator'
 import CardCreator from './components/CardCreator'
 import Quiz from './components/Quiz'
-import QuizCardFront from './components/QuizCardFront'
-import QuizCardBack from './components/QuizCardBack'
 
 
 export default class App extends Component {
