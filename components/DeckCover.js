@@ -5,27 +5,26 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 // import { TabNavigator, StackNavigator } from 'react-navigation'
 // import reducer from './reducers'
 // import { FontAwesome, Ionicons } from '@expo/vector-icons'
-import { offWhite, teal, darkTeal } from "../utils/colors";
+import { offWhite, teal, darkTeal, gray } from "../utils/colors";
 
 export default class DeckCover extends Component {
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation
 
     return (
       <View style={styles.container}>
-        <Text style={styles.h1}>You're in Deck Cover.</Text>
-        <TouchableOpacity
-          style={styles.buttonA}
-          onPress={() => navigate("DeckCover")}
-        >
-          <Text style={styles.buttonTextA}>Hello</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.buttonB}
-          onPress={() => navigate("DeckCover")}
-        >
-          <Text style={styles.buttonTextB}>Hello</Text>
-        </TouchableOpacity>
+        <View style={[styles.flex3, styles.center]}>
+          <Text style={styles.h1}>Deck Title</Text>
+          <Text style={styles.h3}>X Cards</Text>
+        </View>
+        <View style={styles.flex2}>
+          <TouchableOpacity style={styles.buttonA} onPress={() => navigate('CardCreator')}>
+            <Text style={styles.buttonTextA}>Add Card</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonB} onPress={() => navigate('Quiz')}>
+            <Text style={styles.buttonTextB}>Start Quiz</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -34,14 +33,30 @@ export default class DeckCover extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fdfdfd",
+    backgroundColor: '#fdfdfd',
     alignItems: "center",
     justifyContent: "center"
   },
+  center: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  flex2: {
+    flex: 2,
+  },
+  flex3: {
+    flex: 3,
+  },
   h1: {
-    fontFamily: "Avenir-Black",
+    fontFamily: 'Avenir-Black',
     fontSize: 26,
-    color: "#42A590"
+    color: darkTeal,
+  },
+  h3: {
+    fontFamily: 'Avenir-Medium',
+    fontSize: 20,
+    color: gray,
+    marginTop: 15,
   },
   buttonA: {
     backgroundColor: offWhite,
@@ -49,7 +64,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 100,
     paddingVertical: 10,
-    paddingHorizontal: 50
+    paddingHorizontal: 50,
+    marginVertical: 10,
   },
   buttonTextA: {
     fontFamily: "Avenir-Heavy",
@@ -62,7 +78,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 100,
     paddingVertical: 10,
-    paddingHorizontal: 50
+    paddingHorizontal: 50,
+    marginVertical: 10,
   },
   buttonTextB: {
     fontFamily: "Avenir-Heavy",

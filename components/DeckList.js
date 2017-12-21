@@ -16,10 +16,9 @@ export default class DeckList extends Component {
 
     return (
       <View style={styles.container}>
-        <DeckListItem />
-        <DeckListItem />
-        <DeckListItem />
-        <DeckListItem />
+        <TouchableOpacity onPress={() => navigate('DeckCover')}>
+          <DeckListItem />
+        </TouchableOpacity>
       </View>
     );
   }

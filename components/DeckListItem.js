@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   deckTitle: {
     fontFamily: 'Avenir-Heavy',
     fontSize: 20,
-    color: teal,
+    color: darkTeal,
   },
   cardCountAlign: {
 

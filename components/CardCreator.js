@@ -8,6 +8,8 @@ import { StyleSheet, Text, View } from 'react-native'
 
 export default class CardCreator extends Component {
   render() {
+    const { navigate } = this.props.navigation
+
     return (
       <View style={styles.container}>
         <Text style={styles.h1}>You're in CardCreator.</Text>
