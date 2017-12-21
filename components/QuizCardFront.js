@@ -7,22 +7,25 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 // import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { offWhite, teal, darkTeal, gray } from "../utils/colors";
 
-export default class CardCreator extends Component {
+export default class QuizCardFront extends Component {
   render() {
     const { navigate } = this.props.navigation
 
     return (
       <View style={styles.container}>
         <View style={[styles.flex3, styles.center]}>
-          <View>
-            <Text>
-              Insert form here
+          <View style={styles.bigQuestionAlign}>
+            <Text style={styles.bigQuestion}>
+              Does Udacity offer a course on service workers and PWAs?
             </Text>
           </View>
         </View>
         <View style={styles.flex2}>
           <TouchableOpacity style={styles.buttonA} onPress={() => navigate('CardCreator')}>
             <Text style={styles.buttonTextA}>Add Card</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonB} onPress={() => navigate('Quiz')}>
+            <Text style={styles.buttonTextB}>Start Quiz</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -48,14 +51,14 @@ const styles = StyleSheet.create({
     flex: 3,
   },
   bigQuestionAlign: {
-    margin: 10,
+    margin: 20,
   },
   bigQuestion: {
     fontFamily: 'Avenir-Black',
-    fontSize: 36,
+    fontSize: 32,
     color: darkTeal,
   },
-  buttonA: {
+  buttonCorrect: {
     backgroundColor: offWhite,
     borderColor: darkTeal,
     borderWidth: 2,
@@ -64,7 +67,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 50,
     marginVertical: 10,
   },
-  buttonTextA: {
+  buttonText: {
     fontFamily: "Avenir-Heavy",
     fontSize: 20,
     color: darkTeal
