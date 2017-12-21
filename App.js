@@ -1,21 +1,56 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+// import { createStore } from 'redux'
+// import { Provider } from 'react-redux'
+import { StackNavigator } from 'react-navigation'
+// import reducer from './reducers'
+// import { FontAwesome, Ionicons } from '@expo/vector-icons'
 
-export default class App extends React.Component {
+// proj components
+import DeckList from './components/DeckList'
+import DeckCover from './components/DeckCover'
+import DeckCreator from './components/DeckCreator'
+import CardCreator from './components/CardCreator'
+import Quiz from './components/Quiz'
+
+
+export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Hello world!</Text>
+        <RootNav />
       </View>
     );
   }
 }
 
+const RootNav = StackNavigator({ // RootNav renders like a component, with Home as default
+  Home: {
+    screen: DeckList,
+    title: 'Decks',
+  },
+  DeckCover: {
+    screen: DeckCover,
+  },
+  DeckCreator: {
+    screen: DeckCreator,
+  },
+  CardCreator: {
+    screen: CardCreator,
+  },
+  Quiz : {
+    screen: Quiz,
+  },
+});
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#fdfdfd',
   },
+  h1: {
+    fontFamily: 'Avenir-Black',
+    fontSize: 26,
+    color: '#42A590'
+  }
 });
