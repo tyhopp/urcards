@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-// import { createStore } from 'redux'
-// import { Provider } from 'react-redux'
-// import { TabNavigator, StackNavigator } from 'react-navigation'
 // import reducer from './reducers'
-// import { FontAwesome, Ionicons } from '@expo/vector-icons'
-import { offWhite, teal, darkTeal, gray } from "../utils/colors";
+import { offWhite, darkTeal, gray } from "../utils/colors";
 
 export default class DeckCover extends Component {
   render() {
@@ -33,7 +29,7 @@ export default class DeckCover extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fdfdfd',
+    backgroundColor: offWhite,
     alignItems: "center",
     justifyContent: "center"
   },
@@ -49,7 +45,7 @@ const styles = StyleSheet.create({
   },
   h1: {
     fontFamily: 'Avenir-Black',
-    fontSize: 26,
+    fontSize: 28,
     color: darkTeal,
   },
   h3: {

@@ -1,37 +1,27 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 // import reducer from './reducers'
-import { offWhite, darkTeal, gray, correctGreen, incorrectRed } from "../utils/colors";
+import { offWhite, darkTeal, gray } from "../utils/colors";
 
-export default class Quiz extends Component {
+export default class QuizResult extends Component {
   render() {
     const { navigate } = this.props.navigation
 
     return (
       <View style={styles.container}>
         <View style={[styles.flex3, styles.center]}>
-          <View>
-            <Text style={styles.cardNumber}>
-              1 / 2
+          <View style={styles.resultAlign}>
+            <Text style={styles.result}>
+              8 out of 10 questions answered correctly.
             </Text>
           </View>
-          <View style={styles.bigQuestionAlign}>
-            <Text style={styles.bigQuestion}>
-              Does Udacity offer a course on service workers and PWAs?
-            </Text>
-          </View>
-          <TouchableOpacity style={styles.smallAnswerAlign}>
-            <Text style={styles.smallAnswer}>
-              See answer
-            </Text>
-          </TouchableOpacity>
         </View>
         <View style={styles.flex2}>
-          <TouchableOpacity style={styles.buttonCorrect} onPress={() => navigate('Quiz')}>
-            <Text style={styles.buttonTextCorrect}>Correct</Text>
+          <TouchableOpacity style={styles.buttonToDeckCover} onPress={() => navigate('DeckCover')}>
+            <Text style={styles.buttonTextToDeckCover}>Back to deck</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonIncorrect} onPress={() => navigate('Quiz')}>
-            <Text style={styles.buttonTextIncorrect}>Incorrect</Text>
+          <TouchableOpacity style={styles.buttonRestartQuiz} onPress={() => navigate('Quiz')}>
+            <Text style={styles.buttonTextRestartQuiz}>Restart quiz</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -59,10 +49,10 @@ const styles = StyleSheet.create({
   cardNumber: {
     color: gray,
   },
-  bigQuestionAlign: {
+  resultAlign: {
     margin: 15,
   },
-  bigQuestion: {
+  result: {
     fontFamily: 'Avenir-Black',
     fontSize: 28,
     textAlign: 'center',
@@ -87,30 +77,30 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: darkTeal,
   },
-  buttonCorrect: {
-    backgroundColor: correctGreen,
-    borderColor: correctGreen,
+  buttonToDeckCover: {
+    backgroundColor: offWhite,
+    borderColor: darkTeal,
     borderWidth: 2,
     borderRadius: 100,
     paddingVertical: 10,
     paddingHorizontal: 50,
     marginVertical: 10,
   },
-  buttonTextCorrect: {
+  buttonTextToDeckCover: {
     fontFamily: "Avenir-Heavy",
     fontSize: 20,
-    color: offWhite,
+    color: darkTeal,
   },
-  buttonIncorrect: {
-    backgroundColor: incorrectRed,
-    borderColor: incorrectRed,
+  buttonRestartQuiz: {
+    backgroundColor: darkTeal,
+    borderColor: darkTeal,
     borderWidth: 2,
     borderRadius: 100,
     paddingVertical: 10,
     paddingHorizontal: 50,
     marginVertical: 10,
   },
-  buttonTextIncorrect: {
+  buttonTextRestartQuiz: {
     fontFamily: "Avenir-Heavy",
     fontSize: 20,
     color: offWhite,

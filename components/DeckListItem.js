@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { offWhite, teal, darkTeal, gray } from "../utils/colors";
+import { offWhite, darkTeal, lightGray } from "../utils/colors";
 
 export default function DeckListItem({  }) {
   return (
@@ -21,30 +21,26 @@ export default function DeckListItem({  }) {
 
 const styles = StyleSheet.create({
   deckContainer: {
+    backgroundColor: darkTeal,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 2,
-    borderColor: teal,
     borderRadius: 10,
     paddingVertical: 20,
     marginVertical: 10,
     marginHorizontal: 5,
   },
   deckTitleAlign: {
-    marginBottom: 10,
+    marginBottom: 6,
   },
   deckTitle: {
     fontFamily: 'Avenir-Heavy',
-    fontSize: 20,
-    color: darkTeal,
-  },
-  cardCountAlign: {
-
+    fontSize: 24,
+    color: offWhite,
   },
   cardCount: {
     fontFamily: 'Avenir-Medium',
-    fontSize: 16,
-    color: gray,
+    fontSize: 20,
+    color: lightGray,
   },
 });

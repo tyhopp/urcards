@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-// import { createStore } from 'redux'
-// import { Provider } from 'react-redux'
-// import { TabNavigator, StackNavigator } from 'react-navigation'
 // import reducer from './reducers'
-// import { FontAwesome, Ionicons } from '@expo/vector-icons'
-import { offWhite, teal, darkTeal, gray } from "../utils/colors";
+import { offWhite, darkTeal, gray, correctGreen, incorrectRed } from "../utils/colors";
 
 export default class CardCreator extends Component {
   render() {
@@ -13,16 +9,33 @@ export default class CardCreator extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={[styles.flex3, styles.center]}>
-          <View>
-            <Text>
-              Insert form here
+        <View style={[styles.flex1, styles.center]}>
+          <View style={styles.cardQuestionAlign}>
+            <Text style={styles.cardQuestion}>
+              Question
             </Text>
           </View>
+          <TouchableOpacity style={styles.smallAnswerAlign}>
+            <Text style={styles.smallAnswer}>
+              Insert form
+            </Text>
+          </TouchableOpacity>
         </View>
-        <View style={styles.flex2}>
-          <TouchableOpacity style={styles.buttonA} onPress={() => navigate('CardCreator')}>
-            <Text style={styles.buttonTextA}>Add Card</Text>
+        <View style={[styles.flex1, styles.center]}>
+          <View style={styles.cardAnswerAlign}>
+            <Text style={styles.cardAnswer}>
+              Answer
+            </Text>
+          </View>
+          <TouchableOpacity style={styles.smallAnswerAlign}>
+            <Text style={styles.smallAnswer}>
+              Insert form
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={[styles.flex1, styles.center]}>
+          <TouchableOpacity style={styles.buttonSubmit} onPress={() => navigate('CardCreator')}>
+            <Text style={styles.buttonTextSubmit}>Submit</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -33,7 +46,7 @@ export default class CardCreator extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fdfdfd',
+    backgroundColor: offWhite,
     alignItems: "center",
     justifyContent: "center"
   },
@@ -41,21 +54,36 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  flex2: {
-    flex: 2,
+  flex1: {
+    flex: 1,
   },
-  flex3: {
-    flex: 3,
+  cardNumber: {
+    color: gray,
   },
-  bigQuestionAlign: {
-    margin: 10,
+  cardQuestionAlign: {
+    margin: 15,
   },
-  bigQuestion: {
+  cardQuestion: {
     fontFamily: 'Avenir-Black',
-    fontSize: 36,
+    fontSize: 28,
+    textAlign: 'center',
     color: darkTeal,
   },
-  buttonA: {
+  cardAnswerAlign: {
+    margin: 15,
+  },
+  cardAnswer: {
+    fontFamily: 'Avenir-Black',
+    fontSize: 28,
+    textAlign: 'center',
+    color: darkTeal,
+  },
+  smallAnswer: {
+    fontFamily: 'Avenir-Medium',
+    fontSize: 20,
+    color: gray,
+  },
+  buttonSubmit: {
     backgroundColor: offWhite,
     borderColor: darkTeal,
     borderWidth: 2,
@@ -64,23 +92,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 50,
     marginVertical: 10,
   },
-  buttonTextA: {
+  buttonTextSubmit: {
     fontFamily: "Avenir-Heavy",
     fontSize: 20,
-    color: darkTeal
+    color: darkTeal,
   },
-  buttonB: {
-    backgroundColor: darkTeal,
-    borderColor: darkTeal,
-    borderWidth: 2,
-    borderRadius: 100,
-    paddingVertical: 10,
-    paddingHorizontal: 50,
-    marginVertical: 10,
-  },
-  buttonTextB: {
-    fontFamily: "Avenir-Heavy",
-    fontSize: 20,
-    color: offWhite
-  }
 });

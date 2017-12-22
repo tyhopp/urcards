@@ -27,7 +27,6 @@ export default class App extends Component {
 const RootNav = StackNavigator({ // RootNav renders like a component, with Home as default
   Home: {
     screen: DeckList,
-    title: 'Decks',
   },
   DeckCover: {
     screen: DeckCover,
@@ -46,11 +45,5 @@ const RootNav = StackNavigator({ // RootNav renders like a component, with Home 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fdfdfd',
   },
-  h1: {
-    fontFamily: 'Avenir-Black',
-    fontSize: 26,
-    color: '#42A590'
-  }
 });

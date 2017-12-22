@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-// import { createStore } from 'redux'
-// import { Provider } from 'react-redux'
 import { StackNavigator } from "react-navigation";
 // import reducer from './reducers'
-// import { FontAwesome, Ionicons } from '@expo/vector-icons'
-import { offWhite, teal, darkTeal } from "../utils/colors";
+import { offWhite, darkTeal } from "../utils/colors";
 
 // components
 import DeckListItem from './DeckListItem'
+import DeckListItemCreator from './DeckListItemCreator'
 
 export default class DeckList extends Component {
   render() {
@@ -18,6 +16,9 @@ export default class DeckList extends Component {
       <View style={styles.container}>
         <TouchableOpacity onPress={() => navigate('DeckCover')}>
           <DeckListItem />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigate('DeckCreator')}>
+          <DeckListItemCreator />
         </TouchableOpacity>
       </View>
     );
