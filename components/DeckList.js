@@ -1,14 +1,22 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { StackNavigator } from "react-navigation";
-// import reducer from './reducers'
-import { offWhite, darkTeal } from "../utils/colors";
+import React, { Component } from "react"
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native"
+import { StackNavigator } from "react-navigation"
+import { getDecks } from '../actions'
+import { offWhite, darkTeal } from '../utils/colors'
+import { connect } from 'react-redux'
+
 
 // components
 import DeckListItem from './DeckListItem'
 import DeckListItemCreator from './DeckListItemCreator'
 
-export default class DeckList extends Component {
+class DeckList extends Component {
+
+  componentWillMount() {
+    this.props.dispatch(getDecks())
+    console.log(this.props)
+  }
+
   render() {
     const { navigate } = this.props.navigation;
 
@@ -36,3 +44,6 @@ const styles = StyleSheet.create({
     color: darkTeal
   }
 });
+
+
+export default connect()(DeckList)
