@@ -13,7 +13,7 @@ import DeckListItemCreator from './DeckListItemCreator'
 class DeckList extends Component {
 
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation
 
     return (
       <View style={styles.container}>
@@ -40,5 +40,11 @@ const styles = StyleSheet.create({
   }
 });
 
+function mapStateToProps(state) {
+  return {
+    decks: state.decks,
+  }
+}
 
-export default connect()(DeckList)
+
+export default connect(mapStateToProps)(DeckList)
