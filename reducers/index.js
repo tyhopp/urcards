@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux'
-import { GET_DECKS } from '../actions'
+import { reducer as formReducer } from 'redux-form'
+import { 
+	GET_DECKS,
+	CREATE_DECK,
+} from '../actions'
 
 
 
@@ -21,6 +25,13 @@ function decks(state = initialState, action) {
 			return {
 				...state,
 			}
+		case CREATE_DECK :
+			return {
+				...state,
+				[action.deck]: {
+					deckTitle: [action.deck]
+				}
+			}
 		default :
 			return state
 	}
@@ -28,6 +39,7 @@ function decks(state = initialState, action) {
 
 const reducers = combineReducers({ 
 	decks,
+	form: formReducer,
 })
 
 

@@ -1,11 +1,26 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-// import reducer from './reducers'
-import { offWhite, darkTeal, gray, correctGreen, incorrectRed } from "../utils/colors";
+import React, { Component } from "react"
+import { StyleSheet, Text, TextInput, View, TouchableOpacity } from "react-native"
+import { Field, reduxForm, reset } from 'redux-form'
+import { offWhite, darkTeal, gray, correctGreen, incorrectRed } from "../utils/colors"
+import { createDeck } from '../actions'
+import { connect } from 'react-redux'
 
-export default class DeckCreator extends Component {
+const renderInput = ({ input: { onChange, ...restInput }}) => {
+  return <TextInput style={styles.input} 
+                    onChangeText={onChange} {...restInput} 
+                    placeholder='Insert deck title'
+         />
+}
+
+const submit = ({ values, dispatch }) => {
+  dispatch(createDeck(values))
+  dispatch(reset('deckTitleForm'))
+}
+
+class DeckCreator extends Component {
   render() {
     const { navigate } = this.props.navigation
+    const { handleSubmit } = this.props
 
     return (
       <View style={styles.container}>
@@ -15,14 +30,10 @@ export default class DeckCreator extends Component {
               What is the title of your new deck?
             </Text>
           </View>
-          <TouchableOpacity style={styles.smallAnswerAlign}>
-            <Text style={styles.smallAnswer}>
-              Insert form
-            </Text>
-          </TouchableOpacity>
+          <Field name='deckTitle' component={renderInput} />
         </View>
         <View style={styles.flex1}>
-          <TouchableOpacity style={styles.buttonSubmit} onPress={() => navigate('CardCreator')}>
+          <TouchableOpacity style={styles.buttonSubmit} onPress={handleSubmit(submit)}>
             <Text style={styles.buttonTextSubmit}>Submit</Text>
           </TouchableOpacity>
         </View>
@@ -60,13 +71,20 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: darkTeal,
   },
-  smallAnswer: {
+  input: {
     fontFamily: 'Avenir-Medium',
     fontSize: 20,
+    textAlign: 'center',
     color: gray,
+    borderColor: darkTeal,
+    borderWidth: 2,
+    borderRadius: 10,
+    height: 45,
+    width: 300,
+    marginTop: 20,
   },
   buttonSubmit: {
-    backgroundColor: offWhite,
+    backgroundColor: darkTeal,
     borderColor: darkTeal,
     borderWidth: 2,
     borderRadius: 100,
@@ -77,6 +95,12 @@ const styles = StyleSheet.create({
   buttonTextSubmit: {
     fontFamily: "Avenir-Heavy",
     fontSize: 20,
-    color: darkTeal,
+    color: offWhite,
   },
 });
+
+DeckCreator = reduxForm({
+  form: 'deckTitleForm',
+})(DeckCreator)
+
+export default connect()(DeckCreator)
