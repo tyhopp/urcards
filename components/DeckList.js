@@ -18,12 +18,14 @@ class DeckList extends Component {
 
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => navigate('DeckCover')}>
-          <DeckListItem />
-        </TouchableOpacity>
         <TouchableOpacity onPress={() => navigate('DeckCreator')}>
           <DeckListItemCreator />
         </TouchableOpacity>
+        {decks && decks.map((deck) => (
+          <TouchableOpacity key={deck} onPress={() => navigate('DeckCover')}>
+            <DeckListItem deck={deck} />
+          </TouchableOpacity>
+        ))}
       </View>
     );
   }
@@ -43,7 +45,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    decks: state.decks,
+    decks: Object.values(state.decks)
   }
 }
 

@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-// import reducer from './reducers'
+import { connect } from 'react-redux'
 import { offWhite, darkTeal, gray, correctGreen, incorrectRed } from "../utils/colors";
 
-export default class CardCreator extends Component {
+class CardCreator extends Component {
   render() {
     const { navigate } = this.props.navigation
 
     return (
       <View style={styles.container}>
+        {console.log(this.props.decks)}
         <View style={[styles.flex1, styles.center]}>
           <View style={styles.cardQuestionAlign}>
             <Text style={styles.cardQuestion}>
@@ -98,3 +99,11 @@ const styles = StyleSheet.create({
     color: darkTeal,
   },
 });
+
+function mapStateToProps(state) {
+  return {
+    decks: [Object.values(state.decks)]
+  }
+}
+
+export default connect(mapStateToProps)(CardCreator)

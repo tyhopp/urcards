@@ -22,7 +22,6 @@ const submit = (values, dispatch, props) => {
 class DeckCreator extends Component {
   render() {
     const { handleSubmit } = this.props
-    const { navigate } = this.props.navigation
 
     return (
       <View style={styles.container}>

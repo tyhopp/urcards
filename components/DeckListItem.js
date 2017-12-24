@@ -2,12 +2,13 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { offWhite, darkTeal, lightGray } from "../utils/colors";
 
-export default function DeckListItem({  }) {
+export default function DeckListItem({ deck }) {
+
   return (
     <View style={styles.deckContainer}>
       <View style={styles.deckTitleAlign}>
         <Text style={styles.deckTitle}>
-          Deck
+          {deck.deckTitle}
         </Text>
       </View>
       <View style={styles.cardCountAlign}>
