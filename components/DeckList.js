@@ -12,11 +12,6 @@ import DeckListItemCreator from './DeckListItemCreator'
 
 class DeckList extends Component {
 
-  componentWillMount() {
-    this.props.dispatch(getDecks())
-    console.log(this.props)
-  }
-
   render() {
     const { navigate } = this.props.navigation;
 

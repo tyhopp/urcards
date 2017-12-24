@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { createStore, applyMiddleware, compose } from 'redux'
-import { composeWithDevTools, devToolsEnhancer } from 'remote-redux-devtools'
 import { Provider } from 'react-redux'
 import { StackNavigator } from 'react-navigation'
-import reducer from './reducers'
-// import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { store, persistor } from './store'
+import { PersistGate } from 'redux-persist/es/integration/react'
 
 // proj components
 import DeckList from './components/DeckList'
@@ -14,32 +12,18 @@ import DeckCreator from './components/DeckCreator'
 import CardCreator from './components/CardCreator'
 import Quiz from './components/Quiz'
 
-const logger = store => next => action => { 
-  console.group(action.type)
-  console.info('dispatching', action)
-  let result = next(action)
-  console.log('next state', store.getState())
-  console.groupEnd(action.type)
-  return result
-}
 
-
-const store = createStore(
-  reducer,
-  composeWithDevTools(
-    applyMiddleware(
-      logger
-    )
-  )
-)
 
 export default class App extends Component {
+
   render() {
     return (
       <Provider store={store}>
-        <View style={styles.container}>
-          <RootNav />
-        </View>
+        <PersistGate persistor={persistor}>
+          <View style={styles.container}>
+            <RootNav />
+          </View>
+        </PersistGate>
       </Provider>
     )
   }
@@ -68,3 +52,4 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+

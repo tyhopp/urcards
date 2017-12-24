@@ -26,13 +26,11 @@ function decks(state = initialState, action) {
 	}
 }
 
-const reducer = combineReducers({ 
+const reducers = combineReducers({ 
 	decks,
 })
 
 
-
-
-export default reducer
+export default reducers
 
 
