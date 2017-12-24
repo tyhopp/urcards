@@ -12,16 +12,17 @@ const renderInput = ({ input: { onChange, ...restInput }}) => {
          />
 }
 
-const submit = (values, dispatch) => {
-  console.log(values)
+const submit = (values, dispatch, props) => {
+  const { navigate } = props.navigation
   dispatch(createDeck(values))
   dispatch(reset('deckTitleForm')) 
+  navigate('CardCreator')
 }
 
 class DeckCreator extends Component {
   render() {
-    const { navigate } = this.props.navigation
     const { handleSubmit } = this.props
+    const { navigate } = this.props.navigation
 
     return (
       <View style={styles.container}>

@@ -14,6 +14,7 @@ class DeckList extends Component {
 
   render() {
     const { navigate } = this.props.navigation
+    const { decks } = this.props
 
     return (
       <View style={styles.container}>

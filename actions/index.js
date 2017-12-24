@@ -9,9 +9,9 @@ export function getDecks(decks) {
 }
 
 export function createDeck(values) {
-	console.log(values)
+
 	const { deckTitle } = values
-	console.log(deckTitle)
+	
 	return {
 		type: CREATE_DECK,
 		deckTitle

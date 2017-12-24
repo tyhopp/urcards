@@ -6,7 +6,7 @@ import {
 } from '../actions'
 
 
-
+/* STATE SHAPE
 const initialState = {
   deck: {
     deckTitle: '',
@@ -18,8 +18,9 @@ const initialState = {
     ]
   }
 }
+*/
 
-function decks(state = initialState, action) {
+function decks(state = [], action) {
 	switch(action.type){
 		case GET_DECKS :
 			return {
