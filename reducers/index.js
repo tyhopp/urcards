@@ -28,8 +28,8 @@ function decks(state = initialState, action) {
 		case CREATE_DECK :
 			return {
 				...state,
-				[action.deck]: {
-					deckTitle: [action.deck]
+				[action.deckTitle]: {
+					deckTitle: action.deckTitle,
 				}
 			}
 		default :

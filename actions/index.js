@@ -4,20 +4,16 @@ export const CREATE_DECK = 'CREATE_DECK'
 export function getDecks(decks) {
 	return {
 		type: GET_DECKS,
-		decks
+		decks 
 	}
 }
 
 export function createDeck(values) {
-
+	console.log(values)
 	const { deckTitle } = values
-
-	const deck = {
-		deckTitle
-	}
-
+	console.log(deckTitle)
 	return {
 		type: CREATE_DECK,
-		deck
+		deckTitle
 	}
 }

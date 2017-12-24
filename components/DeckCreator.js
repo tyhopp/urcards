@@ -12,9 +12,10 @@ const renderInput = ({ input: { onChange, ...restInput }}) => {
          />
 }
 
-const submit = ({ values, dispatch }) => {
+const submit = (values, dispatch) => {
+  console.log(values)
   dispatch(createDeck(values))
-  dispatch(reset('deckTitleForm'))
+  dispatch(reset('deckTitleForm')) 
 }
 
 class DeckCreator extends Component {
