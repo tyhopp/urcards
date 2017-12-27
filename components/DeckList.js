@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native"
+import { FlatList, StyleSheet, Text, View, TouchableOpacity } from "react-native"
 import { StackNavigator } from "react-navigation"
 import { getDecks } from '../actions'
 import { offWhite, darkTeal } from '../utils/colors'
@@ -21,11 +21,15 @@ class DeckList extends Component {
         <TouchableOpacity onPress={() => navigate('DeckCreator')}>
           <DeckListItemCreator />
         </TouchableOpacity>
-        {decks && decks.map((deck) => (
-          <TouchableOpacity key={deck} onPress={() => navigate('DeckCover')}>
-            <DeckListItem deck={deck} />
-          </TouchableOpacity>
-        ))}
+        <FlatList
+          data={decks}
+          keyExtractor={item => item.deckId}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => navigate('DeckCover')}>
+              <DeckListItem deck={item} />
+            </TouchableOpacity>
+          )}
+        />
       </View>
     );
   }
