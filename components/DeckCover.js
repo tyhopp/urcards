@@ -1,30 +1,27 @@
-import React, { Component } from "react"
+import React from "react"
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native"
 import { offWhite, darkTeal, gray } from "../utils/colors"
-import { connect } from 'react-redux'
 
-class DeckCover extends Component {
-  render() {
-    const { navigate } = this.props.navigation
-    const { deck } = this.props.navigation.state.params
+export default function DeckCover(props) {
+  const { navigate } = props.navigation
+  const { deck } = props.navigation.state.params
 
-    return (
-      <View style={styles.container}>
-        <View style={[styles.flex3, styles.center]}>
-          <Text style={styles.h1}>Deck Title</Text>
-          <Text style={styles.h3}>{(deck.deckQuestions > 0) ? deck.deckQuestions : '0'} Cards</Text>
-        </View>
-        <View style={styles.flex2}>
-          <TouchableOpacity style={styles.buttonA} onPress={() => navigate('CardCreator')}>
-            <Text style={styles.buttonTextA}>Add Card</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonB} onPress={() => navigate('Quiz')}>
-            <Text style={styles.buttonTextB}>Start Quiz</Text>
-          </TouchableOpacity>
-        </View>
+  return (
+    <View style={styles.container}>
+      <View style={[styles.flex3, styles.center]}>
+        <Text style={styles.h1}>Deck Title</Text>
+        <Text style={styles.h3}>{(deck.deckQuestions > 0) ? deck.deckQuestions : '0'} Cards</Text>
       </View>
-    );
-  }
+      <View style={styles.flex2}>
+        <TouchableOpacity style={styles.buttonA} onPress={() => navigate('CardCreator')}>
+          <Text style={styles.buttonTextA}>Add Card</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonB} onPress={() => navigate('Quiz')}>
+          <Text style={styles.buttonTextB}>Start Quiz</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -84,11 +81,3 @@ const styles = StyleSheet.create({
     color: offWhite
   }
 });
-
-function mapStateToProps(state) {
-  return {
-    decks: Object.values(state.decks)
-  }
-}
-
-export default connect(mapStateToProps)(DeckCover)
