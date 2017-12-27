@@ -12,7 +12,7 @@ class DeckCover extends Component {
       <View style={styles.container}>
         <View style={[styles.flex3, styles.center]}>
           <Text style={styles.h1}>Deck Title</Text>
-          <Text style={styles.h3}>X Cards</Text>
+          <Text style={styles.h3}>{(deck.deckQuestions > 0) ? deck.deckQuestions : '0'} Cards</Text>
         </View>
         <View style={styles.flex2}>
           <TouchableOpacity style={styles.buttonA} onPress={() => navigate('CardCreator')}>
