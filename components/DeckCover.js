@@ -1,11 +1,12 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-// import reducer from './reducers'
-import { offWhite, darkTeal, gray } from "../utils/colors";
+import React, { Component } from "react"
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native"
+import { offWhite, darkTeal, gray } from "../utils/colors"
+import { connect } from 'react-redux'
 
-export default class DeckCover extends Component {
+class DeckCover extends Component {
   render() {
     const { navigate } = this.props.navigation
+    const { deck } = this.props.navigation.state.params
 
     return (
       <View style={styles.container}>
@@ -83,3 +84,11 @@ const styles = StyleSheet.create({
     color: offWhite
   }
 });
+
+function mapStateToProps(state) {
+  return {
+    decks: Object.values(state.decks)
+  }
+}
+
+export default connect(mapStateToProps)(DeckCover)

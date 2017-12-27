@@ -25,7 +25,7 @@ class DeckList extends Component {
           data={decks}
           keyExtractor={item => item.deckId}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => navigate('DeckCover')}>
+            <TouchableOpacity onPress={() => navigate('DeckCover', {deck: item})}>
               <DeckListItem deck={item} />
             </TouchableOpacity>
           )}
