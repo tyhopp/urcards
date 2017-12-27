@@ -1,3 +1,5 @@
+import { uuid } from '../utils/helpers'
+
 export const GET_DECKS = 'GET_DECKS'
 export const CREATE_DECK = 'CREATE_DECK'
 
@@ -14,6 +16,7 @@ export function createDeck(values) {
 	
 	return {
 		type: CREATE_DECK,
-		deckTitle
+		deckTitle,
+		deckId: uuid(),
 	}
 }

@@ -30,7 +30,9 @@ function decks(state = [], action) {
 			return {
 				...state,
 				[action.deckTitle]: {
+					deckId: action.deckId,
 					deckTitle: action.deckTitle,
+					deckQuestions: [],
 				}
 			}
 		default :
