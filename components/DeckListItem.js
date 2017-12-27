@@ -13,7 +13,7 @@ export default function DeckListItem({ deck }) {
       </View>
       <View style={styles.cardCountAlign}>
         <Text style={styles.cardCount}>
-          {(deck.deckQuestions > 0) ? deck.deckQuestions : '0'} Cards
+          {(deck.deckQuestions.length > 0) ? deck.deckQuestions : '0'} Cards
         </Text>
       </View>
     </View>

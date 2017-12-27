@@ -3,6 +3,7 @@ import { reducer as formReducer } from 'redux-form'
 import { 
 	GET_DECKS,
 	CREATE_DECK,
+	ADD_CARD,
 } from '../actions'
 
 
@@ -29,10 +30,22 @@ function decks(state = [], action) {
 		case CREATE_DECK :
 			return {
 				...state,
-				[action.deckTitle]: {
+				[action.deckId]: {
 					deckId: action.deckId,
 					deckTitle: action.deckTitle,
 					deckQuestions: [],
+				}
+			}
+		case ADD_CARD :
+			return {
+				...state,
+				[action.parentId]: {
+					deckQuestions: [
+						{
+							cardQuestion: action.cardQuestion,
+							cardAnswer: action.cardAnswer,
+						}
+					]
 				}
 			}
 		default :

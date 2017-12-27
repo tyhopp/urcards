@@ -9,16 +9,18 @@ export default function DeckCover(props) {
   return (
     <View style={styles.container}>
       <View style={[styles.flex3, styles.center]}>
-        <Text style={styles.h1}>Deck Title</Text>
-        <Text style={styles.h3}>{(deck.deckQuestions > 0) ? deck.deckQuestions : '0'} Cards</Text>
+        <Text style={styles.h1}>{deck.deckTitle}</Text>
+        <Text style={styles.h3}>{(deck.deckQuestions.length > 0) ? deck.deckQuestions : '0'} Cards</Text>
       </View>
       <View style={styles.flex2}>
         <TouchableOpacity style={styles.buttonA} onPress={() => navigate('CardCreator')}>
           <Text style={styles.buttonTextA}>Add Card</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonB} onPress={() => navigate('Quiz')}>
-          <Text style={styles.buttonTextB}>Start Quiz</Text>
-        </TouchableOpacity>
+        {(deck.deckQuestions.length > 0) &&
+          <TouchableOpacity style={styles.buttonB} onPress={() => navigate('Quiz')}>
+            <Text style={styles.buttonTextB}>Start Quiz</Text>
+          </TouchableOpacity>
+        }
       </View>
     </View>
   );
