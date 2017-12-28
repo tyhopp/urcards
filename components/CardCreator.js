@@ -1,26 +1,37 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React, { Component } from "react"
+import { TextInput, StyleSheet, Text, View, TouchableOpacity } from "react-native"
+import { Field, reduxForm, reset } from 'redux-form'
 import { connect } from 'react-redux'
-import { offWhite, darkTeal, gray, correctGreen, incorrectRed } from "../utils/colors";
+import { offWhite, darkTeal, gray, correctGreen, incorrectRed } from "../utils/colors"
+import { addCard } from '../actions'
+
+const renderInput = ({ input: { onChange, ...restInput }}) => {
+  return <TextInput style={styles.input} 
+                    onChangeText={onChange} {...restInput} 
+         />
+}
+
+const submit = (values, dispatch, props) => {
+  const { navigate } = props.navigation
+  const { deck } = this.props.navigation.state.params
+  dispatch(addCard(deck.deckId, values))
+  dispatch(reset('cardForm')) 
+  navigate('DeckCover')
+}
 
 class CardCreator extends Component {
-  render() {
-    const { navigate } = this.props.navigation
+  render() { 
+    const { handleSubmit } = this.props
 
     return (
       <View style={styles.container}>
-        {console.log(this.props.decks)}
         <View style={[styles.flex1, styles.center]}>
           <View style={styles.cardQuestionAlign}>
             <Text style={styles.cardQuestion}>
               Question
             </Text>
           </View>
-          <TouchableOpacity style={styles.smallAnswerAlign}>
-            <Text style={styles.smallAnswer}>
-              Insert form
-            </Text>
-          </TouchableOpacity>
+          <Field name='cardQuestion' component={renderInput} />
         </View>
         <View style={[styles.flex1, styles.center]}>
           <View style={styles.cardAnswerAlign}>
@@ -28,14 +39,10 @@ class CardCreator extends Component {
               Answer
             </Text>
           </View>
-          <TouchableOpacity style={styles.smallAnswerAlign}>
-            <Text style={styles.smallAnswer}>
-              Insert form
-            </Text>
-          </TouchableOpacity>
+          <Field name='cardAnswer' component={renderInput} />
         </View>
         <View style={[styles.flex1, styles.center]}>
-          <TouchableOpacity style={styles.buttonSubmit} onPress={() => navigate('CardCreator')}>
+          <TouchableOpacity style={styles.buttonSubmit} onPress={handleSubmit(submit)}>
             <Text style={styles.buttonTextSubmit}>Submit</Text>
           </TouchableOpacity>
         </View>
@@ -100,10 +107,10 @@ const styles = StyleSheet.create({
   },
 });
 
-function mapStateToProps(state) {
-  return {
-    decks: [Object.values(state.decks)]
-  }
-}
 
-export default connect(mapStateToProps)(CardCreator)
+CardCreator = reduxForm({
+  form: 'cardForm',
+})(CardCreator)
+
+
+export default connect()(CardCreator)

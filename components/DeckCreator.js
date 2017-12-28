@@ -15,7 +15,7 @@ const renderInput = ({ input: { onChange, ...restInput }}) => {
 const submit = (values, dispatch, props) => {
   const { navigate } = props.navigation
   dispatch(createDeck(values))
-  dispatch(reset('deckTitleForm')) 
+  dispatch(reset('deckForm')) 
   navigate('CardCreator')
 }
 
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
 });
 
 DeckCreator = reduxForm({
-  form: 'deckTitleForm',
+  form: 'deckForm',
 })(DeckCreator)
 
 export default connect()(DeckCreator)

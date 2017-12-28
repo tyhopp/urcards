@@ -13,7 +13,7 @@ export default function DeckCover(props) {
         <Text style={styles.h3}>{(deck.deckQuestions.length > 0) ? deck.deckQuestions : '0'} Cards</Text>
       </View>
       <View style={styles.flex2}>
-        <TouchableOpacity style={styles.buttonA} onPress={() => navigate('CardCreator')}>
+        <TouchableOpacity style={styles.buttonA} onPress={() => navigate('CardCreator', {deck: deck})}>
           <Text style={styles.buttonTextA}>Add Card</Text>
         </TouchableOpacity>
         {(deck.deckQuestions.length > 0) &&
