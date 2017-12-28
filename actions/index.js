@@ -22,13 +22,13 @@ export function createDeck(values) {
 	}
 }
 
-export function addCard(deckId, values) {
+export function addCard(deckTitle, values) {
 
 	const { cardQuestion, cardAnswer } = values
 
 	return {
 		type: ADD_CARD,
-		parentId: deckId,
+		deck: deckTitle,
 		questionId: uuid(),
 		cardQuestion,
 		cardAnswer,

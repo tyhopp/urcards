@@ -30,7 +30,7 @@ function decks(state = [], action) {
 		case CREATE_DECK :
 			return {
 				...state,
-				[action.deckId]: {
+				[action.deckTitle]: {
 					deckId: action.deckId,
 					deckTitle: action.deckTitle,
 					deckQuestions: [],
@@ -39,11 +39,13 @@ function decks(state = [], action) {
 		case ADD_CARD :
 			return {
 				...state,
-				[action.parentId]: {
+				[action.deck]: {
+					...state.deckId,
+					...state.deckTitle,
 					deckQuestions: [
 						{
 							cardQuestion: action.cardQuestion,
-							cardAnswer: action.cardAnswer,
+							cardAnswer: action.cardAnswer
 						}
 					]
 				}

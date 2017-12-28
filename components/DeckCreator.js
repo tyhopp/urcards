@@ -16,7 +16,7 @@ const submit = (values, dispatch, props) => {
   const { navigate } = props.navigation
   dispatch(createDeck(values))
   dispatch(reset('deckForm')) 
-  navigate('CardCreator')
+  navigate('CardCreator', {deckTitle: values.deckTitle})
 }
 
 class DeckCreator extends Component {

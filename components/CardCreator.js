@@ -13,8 +13,8 @@ const renderInput = ({ input: { onChange, ...restInput }}) => {
 
 const submit = (values, dispatch, props) => {
   const { navigate } = props.navigation
-  const { deck } = this.props.navigation.state.params
-  dispatch(addCard(deck.deckId, values))
+  const { deckTitle } = props.navigation.state.params
+  dispatch(addCard(deckTitle, values))
   dispatch(reset('cardForm')) 
   navigate('DeckCover')
 }
@@ -25,6 +25,7 @@ class CardCreator extends Component {
 
     return (
       <View style={styles.container}>
+        {console.log(this.props)}
         <View style={[styles.flex1, styles.center]}>
           <View style={styles.cardQuestionAlign}>
             <Text style={styles.cardQuestion}>
@@ -41,7 +42,7 @@ class CardCreator extends Component {
           </View>
           <Field name='cardAnswer' component={renderInput} />
         </View>
-        <View style={[styles.flex1, styles.center]}>
+        <View style={[styles.flex2, styles.center]}>
           <TouchableOpacity style={styles.buttonSubmit} onPress={handleSubmit(submit)}>
             <Text style={styles.buttonTextSubmit}>Submit</Text>
           </TouchableOpacity>
@@ -64,6 +65,9 @@ const styles = StyleSheet.create({
   },
   flex1: {
     flex: 1,
+  },
+  flex2: {
+    flex: 2,
   },
   cardNumber: {
     color: gray,
@@ -90,6 +94,18 @@ const styles = StyleSheet.create({
     fontFamily: 'Avenir-Medium',
     fontSize: 20,
     color: gray,
+  },
+  input: {
+    fontFamily: 'Avenir-Medium',
+    fontSize: 20,
+    textAlign: 'center',
+    color: gray,
+    borderColor: darkTeal,
+    borderWidth: 2,
+    borderRadius: 10,
+    height: 45,
+    width: 300,
+    marginTop: 20,
   },
   buttonSubmit: {
     backgroundColor: offWhite,
