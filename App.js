@@ -45,7 +45,7 @@ const navigationOptions = ({ navigation }) => {
 const RootNav = StackNavigator({ // RootNav renders like a component, with Home as default
   Home: {
     screen: DeckList,
-  //  navigationOptions: navigationOptions,
+//  navigationOptions: navigationOptions,
   },
   DeckCover: {
     screen: DeckCover,
