@@ -31,21 +31,9 @@ export default class App extends Component {
   }
 }
 
-const navigationOptions = ({ navigation }) => {
-  headerRight: ({ navigate }) => ({
-      <MaterialIcons 
-        name='dashboard' 
-        size={36} 
-        color={darkTeal} 
-        onPress={() => navigate('DeckList')}
-      /> 
-  })
-}
-
 const RootNav = StackNavigator({ // RootNav renders like a component, with Home as default
   Home: {
     screen: DeckList,
-//  navigationOptions: navigationOptions,
   },
   DeckCover: {
     screen: DeckCover,
