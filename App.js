@@ -4,6 +4,8 @@ import { Provider } from 'react-redux'
 import { StackNavigator } from 'react-navigation'
 import { store, persistor } from './store'
 import { PersistGate } from 'redux-persist/es/integration/react'
+import { MaterialIcons } from '@expo/vector-icons'
+import { darkTeal } from './utils/colors'
 
 // proj components
 import DeckList from './components/DeckList'
@@ -29,9 +31,21 @@ export default class App extends Component {
   }
 }
 
+const navigationOptions = ({ navigation }) => {
+  headerRight: ({ navigate }) => ({
+      <MaterialIcons 
+        name='dashboard' 
+        size={36} 
+        color={darkTeal} 
+        onPress={() => navigate('DeckList')}
+      /> 
+  })
+}
+
 const RootNav = StackNavigator({ // RootNav renders like a component, with Home as default
   Home: {
     screen: DeckList,
+  //  navigationOptions: navigationOptions,
   },
   DeckCover: {
     screen: DeckCover,
