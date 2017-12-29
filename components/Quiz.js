@@ -9,6 +9,9 @@ export default class Quiz extends Component {
 
     return (
       <View style={styles.container}>
+        <TouchableOpacity onPress={() => navigate('Home')}>
+          <Text style={styles.goHome}>BACK TO DECKS</Text>
+        </TouchableOpacity>
         <View style={[styles.flex3, styles.center]}>
           <View>
             <Text style={styles.cardNumber}>
@@ -55,6 +58,12 @@ const styles = StyleSheet.create({
   },
   flex3: {
     flex: 3,
+  },
+  goHome: {
+    fontFamily: 'Avenir-Medium',
+    fontSize: 14,
+    color: gray,
+    marginTop: 20,
   },
   cardNumber: {
     color: gray,

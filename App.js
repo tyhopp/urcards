@@ -34,6 +34,9 @@ export default class App extends Component {
 const RootNav = StackNavigator({ // RootNav renders like a component, with Home as default
   Home: {
     screen: DeckList,
+    navigationOptions: {
+      headerLeft: null,
+    }
   },
   DeckCover: {
     screen: DeckCover,

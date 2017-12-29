@@ -28,6 +28,9 @@ class DeckCover extends Component {
 
     return (
       <View style={styles.container}>
+        <TouchableOpacity onPress={() => navigate('Home')}>
+          <Text style={styles.goHome}>BACK TO DECKS</Text>
+        </TouchableOpacity>
         <View style={[styles.flex3, styles.center]}>
           <Text style={styles.h1}>{deck.deckTitle}</Text>
           <Text style={styles.h3}>{cardCount(deck)}</Text>
@@ -74,6 +77,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: gray,
     marginTop: 15,
+  },
+  goHome: {
+    fontFamily: 'Avenir-Medium',
+    fontSize: 14,
+    color: gray,
+    marginTop: 20,
   },
   buttonA: {
     backgroundColor: offWhite,
