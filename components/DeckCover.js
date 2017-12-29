@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native"
-import { offWhite, darkTeal, gray } from "../utils/colors"
+import { offWhite, darkTeal, gray } from '../utils/colors'
+import { cardCount } from '../utils/helpers'
 import { connect } from 'react-redux'
 import { getDeck } from '../actions'
 
@@ -29,14 +30,14 @@ class DeckCover extends Component {
       <View style={styles.container}>
         <View style={[styles.flex3, styles.center]}>
           <Text style={styles.h1}>{deck.deckTitle}</Text>
-          <Text style={styles.h3}>{(deck.deckQuestions.length > 0) ? deck.deckQuestions : '0'} Cards</Text>
+          <Text style={styles.h3}>{cardCount(deck)}</Text>
         </View>
         <View style={styles.flex2}>
           <TouchableOpacity style={styles.buttonA} onPress={() => navigate('CardCreator', {deckTitle: deck.deckTitle})}>
             <Text style={styles.buttonTextA}>Add Card</Text>
           </TouchableOpacity>
           {(deck.deckQuestions.length > 0) &&
-            <TouchableOpacity style={styles.buttonB} onPress={() => navigate('Quiz')}>
+            <TouchableOpacity style={styles.buttonB} onPress={() => navigate('Quiz', {deck: deck})}>
               <Text style={styles.buttonTextB}>Start Quiz</Text>
             </TouchableOpacity>
           }

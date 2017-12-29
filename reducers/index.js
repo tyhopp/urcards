@@ -22,6 +22,8 @@ const initialState = {
 */
 
 function decks(state = [], action) {
+	const { payload } = action
+
 	switch(action.type){
 		case GET_DECKS :
 			return {
@@ -37,17 +39,12 @@ function decks(state = [], action) {
 				}
 			}
 		case ADD_CARD :
+			const deck = state[payload.deck] // lookup correct deck
 			return {
 				...state,
-				[action.deck]: {
-					...state.deckId,
-					...state.deckTitle,
-					deckQuestions: [
-						{
-							cardQuestion: action.cardQuestion,
-							cardAnswer: action.cardAnswer
-						}
-					]
+				[payload.deck]: {
+					...deck,
+					deckQuestions: deck.deckQuestions.concat(payload.deckQuestions),
 				}
 			}
 		default :

@@ -28,9 +28,14 @@ export function addCard(deckTitle, values) {
 
 	return {
 		type: ADD_CARD,
-		deck: deckTitle,
-		questionId: uuid(),
-		cardQuestion,
-		cardAnswer,
+		payload: {
+			deck: deckTitle,
+			deckQuestions: [
+				{
+					cardQuestion,
+					cardAnswer,
+				}
+			]
+		}
 	}
 }

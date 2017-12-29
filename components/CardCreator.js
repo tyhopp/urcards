@@ -13,10 +13,10 @@ const renderInput = ({ input: { onChange, ...restInput }}) => {
 
 const submit = (values, dispatch, props) => {
   const { navigate } = props.navigation
-  const { deckTitle } = props.navigation.state.params
+  const { deckTitle } = props.navigation.state.params // received deck title
   dispatch(addCard(deckTitle, values))
   dispatch(reset('cardForm')) 
-  navigate('DeckCover')
+  navigate('DeckCover', {receivedDeckTitle: deckTitle})
 }
 
 class CardCreator extends Component {
@@ -25,7 +25,6 @@ class CardCreator extends Component {
 
     return (
       <View style={styles.container}>
-        {console.log(this.props)}
         <View style={[styles.flex1, styles.center]}>
           <View style={styles.cardQuestionAlign}>
             <Text style={styles.cardQuestion}>

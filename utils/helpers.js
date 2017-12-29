@@ -6,3 +6,19 @@ export function uuid() {
     }
     return s4() + s4() + s4() + s4() + s4()
 }
+
+export function cardCount(deck) {
+	if (Object.keys(deck.deckQuestions).length === 1) {
+		return (
+			`${Object.keys(deck.deckQuestions).length}` + ' Card'
+		)
+	} 
+	if (Object.keys(deck.deckQuestions).length > 1) {
+		return (
+			`${Object.keys(deck.deckQuestions).length}` + ' Cards'
+		)
+	} 
+	else {
+		return '0 Cards'
+	}
+}

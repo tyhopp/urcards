@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { offWhite, darkTeal, lightGray } from "../utils/colors";
+import { cardCount } from '../utils/helpers'
 
 export default function DeckListItem({ deck }) {
 
@@ -13,7 +14,7 @@ export default function DeckListItem({ deck }) {
       </View>
       <View style={styles.cardCountAlign}>
         <Text style={styles.cardCount}>
-          {(deck.deckQuestions.length > 0) ? deck.deckQuestions : '0'} Cards
+          {cardCount(deck)}
         </Text>
       </View>
     </View>
