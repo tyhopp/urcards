@@ -1,29 +1,49 @@
-import React from "react"
+import React, { Component } from "react"
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native"
 import { offWhite, darkTeal, gray } from "../utils/colors"
+import { connect } from 'react-redux'
+import { getDeck } from '../actions'
 
-export default function DeckCover(props) {
-  const { navigate } = props.navigation
-  const { deck } = props.navigation.state.params
 
-  return (
-    <View style={styles.container}>
-      <View style={[styles.flex3, styles.center]}>
-        <Text style={styles.h1}>{deck.deckTitle}</Text>
-        <Text style={styles.h3}>{(deck.deckQuestions.length > 0) ? deck.deckQuestions : '0'} Cards</Text>
-      </View>
-      <View style={styles.flex2}>
-        <TouchableOpacity style={styles.buttonA} onPress={() => navigate('CardCreator', {deckTitle: deck.deckTitle})}>
-          <Text style={styles.buttonTextA}>Add Card</Text>
-        </TouchableOpacity>
-        {(deck.deckQuestions.length > 0) &&
-          <TouchableOpacity style={styles.buttonB} onPress={() => navigate('Quiz')}>
-            <Text style={styles.buttonTextB}>Start Quiz</Text>
+class DeckCover extends Component {
+
+  state = {
+    deck: {},
+  }
+
+  componentWillMount() {
+    const { receivedDeckTitle } = this.props.navigation.state.params // deck title from prior component
+    const { decks } = this.props // list of decks from store
+    decks.map((deck) => {
+      if (deck.deckTitle === receivedDeckTitle) { // match selected deck
+        this.setState({ deck: deck }) // sets selected deck
+      }
+    })
+  }
+
+  render() {
+    const { navigate } = this.props.navigation
+    const { deck } = this.state
+
+    return (
+      <View style={styles.container}>
+        <View style={[styles.flex3, styles.center]}>
+          <Text style={styles.h1}>{deck.deckTitle}</Text>
+          <Text style={styles.h3}>{(deck.deckQuestions.length > 0) ? deck.deckQuestions : '0'} Cards</Text>
+        </View>
+        <View style={styles.flex2}>
+          <TouchableOpacity style={styles.buttonA} onPress={() => navigate('CardCreator', {deckTitle: deck.deckTitle})}>
+            <Text style={styles.buttonTextA}>Add Card</Text>
           </TouchableOpacity>
-        }
+          {(deck.deckQuestions.length > 0) &&
+            <TouchableOpacity style={styles.buttonB} onPress={() => navigate('Quiz')}>
+              <Text style={styles.buttonTextB}>Start Quiz</Text>
+            </TouchableOpacity>
+          }
+        </View>
       </View>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -83,3 +103,11 @@ const styles = StyleSheet.create({
     color: offWhite
   }
 });
+
+function mapStateToProps(state) {
+  return {
+    decks: Object.values(state.decks)
+  }
+}
+
+export default connect(mapStateToProps)(DeckCover)
