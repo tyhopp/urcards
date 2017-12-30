@@ -22,3 +22,12 @@ export function cardCount(deck) {
 		return '0 Cards'
 	}
 }
+
+
+export function cardNumber(currentCard) {
+	if (currentCard === 0) {
+		return 1
+	} else {
+		return currentCard + 1
+	}
+}

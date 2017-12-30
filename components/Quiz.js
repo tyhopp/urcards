@@ -1,11 +1,33 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-// import reducer from './reducers'
-import { offWhite, darkTeal, gray, correctGreen, incorrectRed } from "../utils/colors";
+import React, { Component } from "react"
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native"
+import { offWhite, darkTeal, gray, correctGreen, incorrectRed } from "../utils/colors"
+import { cardNumber } from '../utils/helpers'
 
 export default class Quiz extends Component {
+
+  state = {
+    currentCard: 0,
+    showAnswer: false,
+    score: 0,
+  }
+
+  _handleCorrect(){
+    this.setState({ 
+      currentCard: this.state.currentCard + 1,
+      showAnswer: false,
+      score: this.state.score + 1,
+    })
+  }
+
+  _handleIncorrect() {
+    const { navigate } = this.props.navigation
+    navigate('Quiz')
+  }
+
   render() {
     const { navigate } = this.props.navigation
+    const { deckQuestions } = this.props.navigation.state.params.deck // returns array of questions
+    const { currentCard, showAnswer } = this.state
 
     return (
       <View style={styles.container}>
@@ -15,25 +37,28 @@ export default class Quiz extends Component {
         <View style={[styles.flex3, styles.center]}>
           <View>
             <Text style={styles.cardNumber}>
-              1 / 2
+              {cardNumber(currentCard)} / {deckQuestions.length}
             </Text>
           </View>
           <View style={styles.bigQuestionAlign}>
             <Text style={styles.bigQuestion}>
-              Does Udacity offer a course on service workers and PWAs?
+              { showAnswer 
+                ? Object.values(deckQuestions[currentCard].cardAnswer)
+                : Object.values(deckQuestions[currentCard].cardQuestion)
+              }
             </Text>
           </View>
-          <TouchableOpacity style={styles.smallAnswerAlign}>
+          <TouchableOpacity style={styles.smallAnswerAlign} onPress={() => this.setState({ showAnswer: true })}>
             <Text style={styles.smallAnswer}>
               See answer
             </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.flex2}>
-          <TouchableOpacity style={styles.buttonCorrect} onPress={() => navigate('Quiz')}>
+          <TouchableOpacity style={styles.buttonCorrect} onPress={() => this._handleCorrect()}>
             <Text style={styles.buttonTextCorrect}>Correct</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonIncorrect} onPress={() => navigate('Quiz')}>
+          <TouchableOpacity style={styles.buttonIncorrect} onPress={() => this._handleIncorrect()}>
             <Text style={styles.buttonTextIncorrect}>Incorrect</Text>
           </TouchableOpacity>
         </View>

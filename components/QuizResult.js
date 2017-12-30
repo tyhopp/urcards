@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-// import reducer from './reducers'
 import { offWhite, darkTeal, gray } from "../utils/colors";
 
 export default class QuizResult extends Component {
