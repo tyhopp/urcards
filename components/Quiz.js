@@ -17,11 +17,16 @@ export default class Quiz extends Component {
       showAnswer: false,
       score: this.state.score + 1,
     })
+    console.log(this.state.currentCard, this.state.score)
   }
 
-  _handleIncorrect() {
-    const { navigate } = this.props.navigation
-    navigate('Quiz')
+  _handleIncorrect(){
+    this.setState({ 
+      currentCard: this.state.currentCard + 1,
+      showAnswer: false,
+      // don't change score
+    })
+    console.log(this.state.currentCard, this.state.score)
   }
 
   render() {
