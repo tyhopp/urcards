@@ -6,6 +6,7 @@ import { store, persistor } from './store'
 import { PersistGate } from 'redux-persist/es/integration/react'
 import { MaterialIcons } from '@expo/vector-icons'
 import { darkTeal } from './utils/colors'
+import { setLocalNotification } from './utils/helpers'
 
 // proj components
 import DeckList from './components/DeckList'
@@ -18,6 +19,9 @@ import QuizResult from './components/QuizResult'
 
 
 export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
 
   render() {
     return (

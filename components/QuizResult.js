@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { offWhite, darkTeal, gray } from "../utils/colors";
+import { offWhite, darkTeal, gray } from "../utils/colors"
+import { clearLocalNotification } from '../utils/helpers'
 
 export default class QuizResult extends Component {
-  render() {
-const { navigate, score, deck } = this.props // from parent component
 
+  componentDidMount() {
+    clearLocalNotification()
+      .then(setLocalNotification)
+  }
+
+  render() {
+  const { navigate, score, deck } = this.props // from parent component
 
     return (
       <View style={styles.container}>
