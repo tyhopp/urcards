@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { offWhite, darkTeal, gray } from "../utils/colors"
-import { clearLocalNotification } from '../utils/helpers'
+import { clearLocalNotifications, setLocalNotification } from '../utils/helpers'
 
 export default class QuizResult extends Component {
 
   componentDidMount() {
-    clearLocalNotification()
+    clearLocalNotifications()
       .then(setLocalNotification)
   }
 
