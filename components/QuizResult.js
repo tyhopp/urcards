@@ -4,22 +4,23 @@ import { offWhite, darkTeal, gray } from "../utils/colors";
 
 export default class QuizResult extends Component {
   render() {
-    const { navigate } = this.props.navigation
+const { navigate, score, deck } = this.props // from parent component
+
 
     return (
       <View style={styles.container}>
         <View style={[styles.flex3, styles.center]}>
           <View style={styles.resultAlign}>
             <Text style={styles.result}>
-              8 out of 10 questions answered correctly.
+              {score} out of {deck.deckQuestions.length} questions answered correctly.
             </Text>
           </View>
         </View>
         <View style={styles.flex2}>
-          <TouchableOpacity style={styles.buttonToDeckCover} onPress={() => navigate('DeckCover')}>
+          <TouchableOpacity style={styles.buttonToDeckCover} onPress={() => navigate('DeckCover', {receivedDeckTitle: deck.deckTitle})}>
             <Text style={styles.buttonTextToDeckCover}>Back to deck</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonRestartQuiz} onPress={() => navigate('Quiz')}>
+          <TouchableOpacity style={styles.buttonRestartQuiz} onPress={() => navigate('Quiz', {deck: deck})}>
             <Text style={styles.buttonTextRestartQuiz}>Restart quiz</Text>
           </TouchableOpacity>
         </View>

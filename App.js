@@ -13,6 +13,7 @@ import DeckCover from './components/DeckCover'
 import DeckCreator from './components/DeckCreator'
 import CardCreator from './components/CardCreator'
 import Quiz from './components/Quiz'
+import QuizResult from './components/QuizResult'
 
 
 
@@ -49,6 +50,9 @@ const RootNav = StackNavigator({ // RootNav renders like a component, with Home 
   },
   Quiz: {
     screen: Quiz,
+  },
+  QuizResult: {
+    screen: QuizResult,
   },
 });
 

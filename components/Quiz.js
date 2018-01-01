@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native"
 import { offWhite, darkTeal, gray, correctGreen, incorrectRed } from "../utils/colors"
 import { cardNumber } from '../utils/helpers'
+import QuizResult from './QuizResult'
+
 
 export default class Quiz extends Component {
 
@@ -17,7 +19,6 @@ export default class Quiz extends Component {
       showAnswer: false,
       score: this.state.score + 1,
     })
-    console.log(this.state.currentCard, this.state.score)
   }
 
   _handleIncorrect(){
@@ -26,49 +27,66 @@ export default class Quiz extends Component {
       showAnswer: false,
       // don't change score
     })
-    console.log(this.state.currentCard, this.state.score)
   }
 
   render() {
     const { navigate } = this.props.navigation
+    const { deck } = this.props.navigation.state.params
     const { deckQuestions } = this.props.navigation.state.params.deck // returns array of questions
-    const { currentCard, showAnswer } = this.state
+    const { currentCard, showAnswer, score } = this.state
 
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity onPress={() => navigate('Home')}>
-          <Text style={styles.goHome}>BACK TO DECKS</Text>
-        </TouchableOpacity>
-        <View style={[styles.flex3, styles.center]}>
-          <View>
-            <Text style={styles.cardNumber}>
-              {cardNumber(currentCard)} / {deckQuestions.length}
-            </Text>
+    if ( currentCard !== deckQuestions.length) { // show quiz card
+      return (
+        <View style={styles.container}>
+          <TouchableOpacity onPress={() => navigate('Home')}>
+            <Text style={styles.goHome}>BACK TO DECKS</Text>
+          </TouchableOpacity>
+          <View style={[styles.flex3, styles.center]}>
+            <View>
+              <Text style={styles.cardNumber}>
+                {cardNumber(currentCard)} / {deckQuestions.length}
+              </Text>
+            </View>
+            <View style={styles.bigQuestionAlign}>
+              <Text style={styles.bigQuestion}>
+                { showAnswer 
+                  ? Object.values(deckQuestions[currentCard].cardAnswer)
+                  : Object.values(deckQuestions[currentCard].cardQuestion)
+                }
+              </Text>
+            </View>
+            { showAnswer
+              ? <TouchableOpacity style={styles.smallAnswerAlign} onPress={() => this.setState({ showAnswer: false })}>
+                  <Text style={styles.smallAnswer}>
+                    See question
+                  </Text>
+                </TouchableOpacity>
+              : <TouchableOpacity style={styles.smallAnswerAlign} onPress={() => this.setState({ showAnswer: true })}>
+                  <Text style={styles.smallAnswer}>
+                    See answer
+                  </Text>
+                </TouchableOpacity>
+            }
           </View>
-          <View style={styles.bigQuestionAlign}>
-            <Text style={styles.bigQuestion}>
-              { showAnswer 
-                ? Object.values(deckQuestions[currentCard].cardAnswer)
-                : Object.values(deckQuestions[currentCard].cardQuestion)
-              }
-            </Text>
+          <View style={styles.flex2}>
+            <TouchableOpacity style={styles.buttonCorrect} onPress={() => this._handleCorrect()}>
+              <Text style={styles.buttonTextCorrect}>Correct</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonIncorrect} onPress={() => this._handleIncorrect()}>
+              <Text style={styles.buttonTextIncorrect}>Incorrect</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.smallAnswerAlign} onPress={() => this.setState({ showAnswer: true })}>
-            <Text style={styles.smallAnswer}>
-              See answer
-            </Text>
-          </TouchableOpacity>
         </View>
-        <View style={styles.flex2}>
-          <TouchableOpacity style={styles.buttonCorrect} onPress={() => this._handleCorrect()}>
-            <Text style={styles.buttonTextCorrect}>Correct</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonIncorrect} onPress={() => this._handleIncorrect()}>
-            <Text style={styles.buttonTextIncorrect}>Incorrect</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
+      );
+    } else { // go to quiz result
+      return (
+        <QuizResult 
+          navigate={navigate} 
+          score={score} 
+          deck={deck}
+        />
+      )
+    }
   }
 }
 
