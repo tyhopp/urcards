@@ -11,4 +11,4 @@ const config = {
 
 const reducer = persistReducer(config, reducers) // combined reducers object
 export const store = createStore(reducer, composeWithDevTools()) // add remote redux tools
-export const persistor = persistStore(store) 
+export const persistor = persistStore(store)

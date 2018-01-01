@@ -35,7 +35,7 @@ class DeckCreator extends Component {
         </View>
         <View style={styles.flex1}>
           <TouchableOpacity style={styles.buttonSubmit} onPress={handleSubmit(submit)}>
-            <Text style={styles.buttonTextSubmit}>Submit</Text>
+            <Text style={styles.buttonTextSubmit}>Create deck</Text>
           </TouchableOpacity>
         </View>
       </View>
