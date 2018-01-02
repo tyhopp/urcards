@@ -2,21 +2,24 @@ import React, { Component } from "react"
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native"
 import { offWhite, darkTeal, gray, correctGreen, incorrectRed } from "../utils/colors"
 import { cardNumber } from '../utils/helpers'
+import QuizCards from './QuizCards'
 import QuizResult from './QuizResult'
 
 
-export default class Quiz extends Component {
-
-  state = {
-    currentCard: 0,
-    showAnswer: false,
-    score: 0,
+class Quiz extends Component {
+  constructor(props) {
+    super(props);
+    this._handleCorrect = this._handleCorrect.bind(this);
+    this._handleIncorrect = this._handleIncorrect.bind(this);
+    this.state = {
+      currentCard: 0,
+      score: 0,
+    }
   }
 
   _handleCorrect(){
     this.setState({ 
       currentCard: this.state.currentCard + 1,
-      showAnswer: false,
       score: this.state.score + 1,
     })
   }
@@ -24,66 +27,30 @@ export default class Quiz extends Component {
   _handleIncorrect(){
     this.setState({ 
       currentCard: this.state.currentCard + 1,
-      showAnswer: false,
       // don't change score
     })
   }
 
   render() {
-    const { navigate } = this.props.navigation
-    const { deck } = this.props.navigation.state.params
-    const { deckQuestions } = this.props.navigation.state.params.deck // returns array of questions
-    const { currentCard, showAnswer, score } = this.state
+    const { navigation } = this.props
+    const { deckQuestions } = this.props.navigation.state.params.deck 
+    const { currentCard, score } = this.state
 
-    if ( currentCard !== deckQuestions.length) { // show quiz card
-      return (
-        <View style={styles.container}>
-          <TouchableOpacity onPress={() => navigate('Home')}>
-            <Text style={styles.goHome}>BACK TO DECKS</Text>
-          </TouchableOpacity>
-          <View style={[styles.flex3, styles.center]}>
-            <View>
-              <Text style={styles.cardNumber}>
-                {cardNumber(currentCard)} / {deckQuestions.length}
-              </Text>
-            </View>
-            <View style={styles.bigQuestionAlign}>
-              <Text style={styles.bigQuestion}>
-                { showAnswer 
-                  ? Object.values(deckQuestions[currentCard].cardAnswer)
-                  : Object.values(deckQuestions[currentCard].cardQuestion)
-                }
-              </Text>
-            </View>
-            { showAnswer
-              ? <TouchableOpacity style={styles.smallAnswerAlign} onPress={() => this.setState({ showAnswer: false })}>
-                  <Text style={styles.smallAnswer}>
-                    See question
-                  </Text>
-                </TouchableOpacity>
-              : <TouchableOpacity style={styles.smallAnswerAlign} onPress={() => this.setState({ showAnswer: true })}>
-                  <Text style={styles.smallAnswer}>
-                    See answer
-                  </Text>
-                </TouchableOpacity>
-            }
-          </View>
-          <View style={styles.flex2}>
-            <TouchableOpacity style={styles.buttonCorrect} onPress={() => this._handleCorrect()}>
-              <Text style={styles.buttonTextCorrect}>Correct</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonIncorrect} onPress={() => this._handleIncorrect()}>
-              <Text style={styles.buttonTextIncorrect}>Incorrect</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      );
-    } else { // go to quiz result
+    if (currentCard === deckQuestions.length) { // show quiz result
       return (
         <QuizResult 
-          navigate={navigate} 
-          score={score} 
-          deck={deck}
+          navigation={navigation}
+          score={score}
+        />
+      )
+    } else {
+      return (
+        <QuizCards 
+          navigation={navigation}
+          currentCard={currentCard}
+          score={score}
+          _handleCorrect={this._handleCorrect}
+          _handleIncorrect={this._handleIncorrect}
         />
       )
     }
@@ -173,3 +140,6 @@ const styles = StyleSheet.create({
     color: offWhite,
   }
 });
+
+
+export default Quiz

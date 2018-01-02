@@ -11,14 +11,16 @@ export default class QuizResult extends Component {
   }
 
   render() {
-  const { navigate, score, deck } = this.props // from parent component
+    const { navigate } = this.props.navigation
+    const { deckQuestions } = this.props.navigation.state.params.deck 
+    const { score } = this.props // from parent component
 
     return (
       <View style={styles.container}>
         <View style={[styles.flex3, styles.center]}>
           <View style={styles.resultAlign}>
             <Text style={styles.result}>
-              {score} out of {deck.deckQuestions.length} questions answered correctly.
+              {score} out of {deckQuestions.length} questions answered correctly.
             </Text>
           </View>
         </View>
