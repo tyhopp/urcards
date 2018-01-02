@@ -4,6 +4,7 @@ import { Field, reduxForm, reset } from 'redux-form'
 import { connect } from 'react-redux'
 import { offWhite, darkTeal, gray, correctGreen, incorrectRed } from "../utils/colors"
 import { addCard } from '../actions'
+import { formValidate } from '../utils/helpers'
 
 const renderInput = ({ input: { onChange, ...restInput }}) => {
   return <TextInput style={styles.input} 
@@ -14,9 +15,13 @@ const renderInput = ({ input: { onChange, ...restInput }}) => {
 const submit = (values, dispatch, props) => {
   const { navigate } = props.navigation
   const { deckTitle } = props.navigation.state.params // received deck title
-  dispatch(addCard(deckTitle, values))
-  dispatch(reset('cardForm')) 
-  navigate('DeckCover', {receivedDeckTitle: deckTitle})
+  if (values.cardQuestion && values.cardAnswer) { // if fields are not empty
+    dispatch(addCard(deckTitle, values))
+    dispatch(reset('cardForm')) 
+    navigate('DeckCover', {receivedDeckTitle: deckTitle})
+  } else {
+    formValidate() // alert requiring fields not to be empty
+  }
 }
 
 class CardCreator extends Component {

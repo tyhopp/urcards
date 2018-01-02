@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage, Alert } from 'react-native'
 import { Notifications, Permissions } from 'expo'
 
 export function uuid() {
@@ -85,4 +85,12 @@ export function setLocalNotification() {
 				})
 			}
 		})
+}
+
+export function formValidate() {
+	Alert.alert(
+	  'Warning ⚠️',
+	  'Text must not be empty. Please insert something and try again. 👌',
+	  { cancelable: false }
+	)
 }

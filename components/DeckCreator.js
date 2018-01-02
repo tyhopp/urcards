@@ -4,6 +4,7 @@ import { Field, reduxForm, reset } from 'redux-form'
 import { offWhite, darkTeal, gray, correctGreen, incorrectRed } from "../utils/colors"
 import { createDeck } from '../actions'
 import { connect } from 'react-redux'
+import { formValidate } from '../utils/helpers'
 
 const renderInput = ({ input: { onChange, ...restInput }}) => {
   return <TextInput style={styles.input} 
@@ -14,9 +15,14 @@ const renderInput = ({ input: { onChange, ...restInput }}) => {
 
 const submit = (values, dispatch, props) => {
   const { navigate } = props.navigation
-  dispatch(createDeck(values))
-  dispatch(reset('deckForm')) 
-  navigate('DeckCover', {receivedDeckTitle: values.deckTitle}) // send deck title
+
+  if (values.deckTitle) { // field is not empty
+    dispatch(createDeck(values))
+    dispatch(reset('deckForm')) 
+    navigate('DeckCover', {receivedDeckTitle: values.deckTitle}) // send deck title
+  } else {
+    formValidate() // alert requiring field not to be empty
+  }
 }
 
 class DeckCreator extends Component {
