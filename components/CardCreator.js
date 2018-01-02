@@ -13,12 +13,12 @@ const renderInput = ({ input: { onChange, ...restInput }}) => {
 }
 
 const submit = (values, dispatch, props) => {
-  const { navigate } = props.navigation
+  const { goBack } = props.navigation
   const { deckTitle } = props.navigation.state.params // received deck title
   if (values.cardQuestion && values.cardAnswer) { // if fields are not empty
     dispatch(addCard(deckTitle, values))
     dispatch(reset('cardForm')) 
-    navigate('DeckCover', {receivedDeckTitle: deckTitle})
+    goBack(null)
   } else {
     formValidate() // alert requiring fields not to be empty
   }
