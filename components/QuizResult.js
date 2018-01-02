@@ -11,9 +11,10 @@ export default class QuizResult extends Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation
+    const { goBack, navigate } = this.props.navigation
+    const { deck } = this.props.navigation.state.params
     const { deckQuestions } = this.props.navigation.state.params.deck 
-    const { score } = this.props // from parent component
+    const { score } = this.props 
 
     return (
       <View style={styles.container}>
@@ -25,7 +26,7 @@ export default class QuizResult extends Component {
           </View>
         </View>
         <View style={styles.flex2}>
-          <TouchableOpacity style={styles.buttonToDeckCover} onPress={() => navigate('DeckCover', {receivedDeckTitle: deck.deckTitle})}>
+          <TouchableOpacity style={styles.buttonToDeckCover} onPress={() => goBack(null)}>
             <Text style={styles.buttonTextToDeckCover}>Back to deck</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonRestartQuiz} onPress={() => navigate('Quiz', {deck: deck})}>

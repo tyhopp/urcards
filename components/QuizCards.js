@@ -16,14 +16,6 @@ export default class QuizCards extends Component {
     }
   }
 
-
-  componentDidMount() {
-    this.setState({
-      currentCard: this.props.currentCard,
-      score: this.props.score
-    })
-  }
-
   _liftUpHandleCorrect() {
     this.props._handleCorrect()
     this.setState({ showAnswer: false })
@@ -37,7 +29,8 @@ export default class QuizCards extends Component {
   render() {
     const { navigate } = this.props.navigation
     const { deckQuestions } = this.props.navigation.state.params.deck
-    const { currentCard, score, showAnswer } = this.state
+    const { showAnswer } = this.state
+    const { currentCard, score } = this.props
 
     if (currentCard !== deckQuestions.length) { // show quiz card
       return (
