@@ -8,43 +8,33 @@ import { getDeck } from '../actions'
 
 class DeckCover extends Component {
 
-  state = {
-    deck: {},
-  }
-
-  componentWillMount() {
-    const { receivedDeckTitle } = this.props.navigation.state.params // deck title from prior component
-    const { decks } = this.props // list of decks from store
-    decks.map((deck) => {
-      if (deck.deckTitle === receivedDeckTitle) { // match selected deck
-        this.setState({ deck: deck }) // sets selected deck
-      }
-    })
-  }
-
   render() {
     const { navigate } = this.props.navigation
-    const { deck } = this.state
+    const { deck } = this.props // array 
 
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => navigate('Home')}>
-          <Text style={styles.goHome}>BACK TO DECKS</Text>
-        </TouchableOpacity>
-        <View style={[styles.flex3, styles.center]}>
-          <Text style={styles.h1}>{deck.deckTitle}</Text>
-          <Text style={styles.h3}>{cardCount(deck)}</Text>
-        </View>
-        <View style={styles.flex2}>
-          <TouchableOpacity style={styles.buttonA} onPress={() => navigate('CardCreator', {deckTitle: deck.deckTitle})}>
-            <Text style={styles.buttonTextA}>Add Card</Text>
-          </TouchableOpacity>
-          {(deck.deckQuestions.length > 0) &&
-            <TouchableOpacity style={styles.buttonB} onPress={() => navigate('Quiz', {deck: deck})}>
-              <Text style={styles.buttonTextB}>Start Quiz</Text>
+        {deck && deck.map((deck) => (
+          <View key={deck}>
+            <TouchableOpacity style={styles.center} onPress={() => navigate('Home')}>
+              <Text style={styles.goHome}>BACK TO DECKS</Text>
             </TouchableOpacity>
-          }
-        </View>
+            <View style={[styles.flex3, styles.center]}>
+              <Text style={styles.h1}>{deck.deckTitle}</Text>
+              <Text style={styles.h3}>{cardCount(deck)}</Text>
+            </View>
+            <View style={styles.flex2}>
+              <TouchableOpacity style={styles.buttonA} onPress={() => navigate('CardCreator', {deckTitle: deck.deckTitle})}>
+                <Text style={styles.buttonTextA}>Add Card</Text>
+              </TouchableOpacity>
+              {(deck.deckQuestions.length > 0) &&
+                <TouchableOpacity style={styles.buttonB} onPress={() => navigate('Quiz', {deck: deck})}>
+                  <Text style={styles.buttonTextB}>Start Quiz</Text>
+                </TouchableOpacity>
+              }
+            </View>
+          </View>
+        ))}
       </View>
     );
   }
@@ -114,9 +104,10 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
+  const { receivedDeckTitle } = ownProps.navigation.state.params // deck title from prior component
   return {
-    decks: Object.values(state.decks)
+    deck: Object.values(state.decks).filter(deck => deck.deckTitle === receivedDeckTitle) // returns array
   }
 }
 
