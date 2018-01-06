@@ -3,7 +3,7 @@
 A basic React Native flashcards app for the [Udacity React Developer Nanodegree](https://www.udacity.com/course/react-nanodegree--nd019). This app has been tested for iOS only and focuses on meeting minimal functionality standards for the course. 
 
 ## Demo
-![Demo for Urcards project](https://github.com/tyhopp/urcards/blob/master/urcards-demo.gif)
+<img src="https://github.com/tyhopp/urcards/blob/master/urcards-demo.gif" style="width: 300px;" alt="Demo for Urcards project" />
 
 ## Usage
 - `git clone https://github.com/tyhopp/urcards`
