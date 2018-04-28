@@ -29,3 +29,9 @@ This project uses `redux-persist` by [rt2zz](https://github.com/rt2zz/redux-pers
 ## Credits
 
 This project was built with [React Native](https://facebook.github.io/react-native/)/[Redux](https://github.com/reactjs/redux)/[Expo](https://expo.io/) and bootstrapped with [`create-react-native-app`](https://facebook.github.io/react-native/blog/2017/03/13/introducing-create-react-native-app.html), alongside the incredible work of many other open source contributors.
+
+## License
+
+MIT License
+
+Copyright (c) 2018 Ty Hopp
